@@ -46,4 +46,12 @@ class Solution {
         val multiplyByThree: Int.() -> Int = { times(3) }
         assertEquals(3.multiplyByThree(), 9)
     }
+
+    @test
+    fun `should pass lambda as a reference`() {
+        val transformer: (Int, (Int) -> Int) -> Int = { value, transform -> transform(value) }
+        val timesTwoLambda: (Int) -> Int = { it * 2}
+
+        assertEquals(transformer(2, timesTwoLambda), 4)
+    }
 }
